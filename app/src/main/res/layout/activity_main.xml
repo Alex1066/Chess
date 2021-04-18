@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayoutPortrait"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3ECEC"
+    android:backgroundTint="#151717"
+    android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+    android:focusable="auto"
+    android:orientation="vertical"
+    android:visibility="visible"
+    app:layout_constraintVertical_bias="0.77"
+    tools:context=".MainActivity"
+    tools:ignore="ExtraText"
+    tools:visibility="visible">
+
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_00"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:layout_marginStart="6dp"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/square_08"
+        app:square_index="0" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_01"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_00"
+        app:layout_constraintTop_toBottomOf="@id/square_08"
+        app:square_index="1" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_02"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_01"
+        app:layout_constraintTop_toBottomOf="@id/square_08"
+        app:square_index="2" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_03"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_02"
+        app:layout_constraintTop_toBottomOf="@id/square_08"
+        app:square_index="3" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_04"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_03"
+        app:layout_constraintTop_toBottomOf="@id/square_08"
+        app:square_index="4" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_05"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_04"
+        app:layout_constraintTop_toBottomOf="@id/square_08"
+        app:square_index="5" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_06"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_05"
+        app:layout_constraintTop_toBottomOf="@id/square_08"
+        app:square_index="6" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_07"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_06"
+        app:layout_constraintTop_toBottomOf="@id/square_08"
+        app:square_index="7" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_08"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:layout_marginStart="6dp"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/square_16"
+        app:square_index="8" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_09"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_08"
+        app:layout_constraintTop_toBottomOf="@id/square_16"
+        app:square_index="9" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_10"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_09"
+        app:layout_constraintTop_toBottomOf="@id/square_16"
+        app:square_index="10" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_11"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_10"
+        app:layout_constraintTop_toBottomOf="@id/square_16"
+        app:square_index="11" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_12"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_11"
+        app:layout_constraintTop_toBottomOf="@id/square_16"
+        app:square_index="12" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_13"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_12"
+        app:layout_constraintTop_toBottomOf="@id/square_16"
+        app:square_index="13" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_14"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_13"
+        app:layout_constraintTop_toBottomOf="@id/square_16"
+        app:square_index="14" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_15"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_14"
+        app:layout_constraintTop_toBottomOf="@id/square_16"
+        app:square_index="15" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_16"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:layout_marginStart="6dp"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/square_24"
+        app:square_index="16" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_17"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_16"
+        app:layout_constraintTop_toBottomOf="@id/square_24"
+        app:square_index="17" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_18"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_17"
+        app:layout_constraintTop_toBottomOf="@id/square_24"
+        app:square_index="18" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_19"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_18"
+        app:layout_constraintTop_toBottomOf="@id/square_24"
+        app:square_index="19" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_20"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_19"
+        app:layout_constraintTop_toBottomOf="@id/square_24"
+        app:square_index="20" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_21"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_20"
+        app:layout_constraintTop_toBottomOf="@id/square_24"
+        app:square_index="21" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_22"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_21"
+        app:layout_constraintTop_toBottomOf="@id/square_24"
+        app:square_index="22" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_23"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_22"
+        app:layout_constraintTop_toBottomOf="@id/square_24"
+        app:square_index="23" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_24"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:layout_marginStart="6dp"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/square_32"
+        app:square_index="24" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_25"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_24"
+        app:layout_constraintTop_toBottomOf="@id/square_32"
+        app:square_index="25" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_26"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_25"
+        app:layout_constraintTop_toBottomOf="@id/square_32"
+        app:square_index="26" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_27"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_26"
+        app:layout_constraintTop_toBottomOf="@id/square_32"
+        app:square_index="27" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_28"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_27"
+        app:layout_constraintTop_toBottomOf="@id/square_32"
+        app:square_index="28" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_29"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_28"
+        app:layout_constraintTop_toBottomOf="@id/square_32"
+        app:square_index="29" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_30"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_29"
+        app:layout_constraintTop_toBottomOf="@id/square_32"
+        app:square_index="30" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_31"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_30"
+        app:layout_constraintTop_toBottomOf="@id/square_32"
+        app:square_index="31" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_32"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:layout_marginStart="6dp"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/square_40"
+        app:square_index="32" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_33"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_32"
+        app:layout_constraintTop_toBottomOf="@id/square_40"
+        app:square_index="33" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_34"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_33"
+        app:layout_constraintTop_toBottomOf="@id/square_40"
+        app:square_index="34" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_35"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_34"
+        app:layout_constraintTop_toBottomOf="@id/square_40"
+        app:square_index="35" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_36"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_35"
+        app:layout_constraintTop_toBottomOf="@id/square_40"
+        app:square_index="36" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_37"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_36"
+        app:layout_constraintTop_toBottomOf="@id/square_40"
+        app:square_index="37" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_38"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_37"
+        app:layout_constraintTop_toBottomOf="@id/square_40"
+        app:square_index="38" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_39"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_38"
+        app:layout_constraintTop_toBottomOf="@id/square_40"
+        app:square_index="39" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_40"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:layout_marginStart="6dp"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/square_48"
+        app:square_index="40" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_41"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_40"
+        app:layout_constraintTop_toBottomOf="@id/square_48"
+        app:square_index="41" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_42"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_41"
+        app:layout_constraintTop_toBottomOf="@id/square_48"
+        app:square_index="42" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_43"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_42"
+        app:layout_constraintTop_toBottomOf="@id/square_48"
+        app:square_index="43" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_44"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_43"
+        app:layout_constraintTop_toBottomOf="@id/square_48"
+        app:square_index="44" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_45"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_44"
+        app:layout_constraintTop_toBottomOf="@id/square_48"
+        app:square_index="45" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_46"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_45"
+        app:layout_constraintTop_toBottomOf="@id/square_48"
+        app:square_index="46" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_47"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_46"
+        app:layout_constraintTop_toBottomOf="@id/square_48"
+        app:square_index="47" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_48"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:layout_marginStart="6dp"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/square_56"
+        app:square_index="48" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_49"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_48"
+        app:layout_constraintTop_toBottomOf="@id/square_56"
+        app:square_index="49" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_50"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_49"
+        app:layout_constraintTop_toBottomOf="@id/square_56"
+        app:square_index="50" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_51"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_50"
+        app:layout_constraintTop_toBottomOf="@id/square_56"
+        app:square_index="51" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_52"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_51"
+        app:layout_constraintTop_toBottomOf="@id/square_56"
+        app:square_index="52" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_53"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_52"
+        app:layout_constraintTop_toBottomOf="@id/square_56"
+        app:square_index="53" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_54"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintStart_toEndOf="@+id/square_53"
+        app:layout_constraintTop_toBottomOf="@id/square_56"
+        app:square_index="54" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_55"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toEndOf="@+id/square_54"
+        app:layout_constraintTop_toBottomOf="@id/square_56"
+        app:square_index="55" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_56"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:square_index="56" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_57"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintBottom_toTopOf="@+id/square_48"
+        app:layout_constraintStart_toEndOf="@+id/square_56"
+        app:square_index="57" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_58"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintBottom_toTopOf="@+id/square_48"
+        app:layout_constraintStart_toEndOf="@+id/square_57"
+        app:square_index="58" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_59"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintBottom_toTopOf="@+id/square_48"
+        app:layout_constraintStart_toEndOf="@+id/square_58"
+        app:square_index="59" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_60"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintBottom_toTopOf="@+id/square_48"
+        app:layout_constraintStart_toEndOf="@+id/square_59"
+        app:square_index="60" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_61"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintBottom_toTopOf="@+id/square_48"
+        app:layout_constraintStart_toEndOf="@+id/square_60"
+        app:square_index="61" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_62"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_light_square"
+        app:layout_constraintBottom_toTopOf="@+id/square_48"
+        app:layout_constraintStart_toEndOf="@+id/square_61"
+        app:square_index="62" />
+
+    <com.example.chess.customviews.BoardSquareView
+        android:id="@+id/square_63"
+        android:layout_width="@dimen/tile_size"
+        android:layout_height="@dimen/tile_size"
+        android:background="@color/blue_theme_dark_square"
+        app:layout_constraintBottom_toTopOf="@+id/square_48"
+        app:layout_constraintStart_toEndOf="@+id/square_62"
+        app:square_index="63" />
+
+    <LinearLayout
+        android:id="@+id/promotion_options"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="#C6C5C3"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/square_03"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/square_60">
+
+        <com.example.chess.customviews.PromotionOptionView
+            android:id="@+id/queen"
+            android:layout_width="@dimen/tile_size"
+            android:layout_height="@dimen/tile_size" />
+
+        <com.example.chess.customviews.PromotionOptionView
+            android:id="@+id/rook"
+            android:layout_width="@dimen/tile_size"
+            android:layout_height="@dimen/tile_size" />
+
+        <com.example.chess.customviews.PromotionOptionView
+            android:id="@+id/bishop"
+            android:layout_width="@dimen/tile_size"
+            android:layout_height="@dimen/tile_size" />
+
+        <com.example.chess.customviews.PromotionOptionView
+            android:id="@+id/knight"
+            android:layout_width="@dimen/tile_size"
+            android:layout_height="@dimen/tile_size" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/Reset"
+        android:layout_width="@dimen/flip_button_width"
+        android:layout_height="@dimen/flip_button_height"
+        android:layout_marginStart="4dp"
+        android:backgroundTint="#10B8C8"
+        android:text="@string/flip_board"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/square_00"
+        app:layout_constraintVertical_bias="0.901" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

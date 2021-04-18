@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BoardSquareView">
+        <attr name="square" format="integer"/>
+        <attr name="square_index" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="PromotionOptionView">
+        <attr name="piece_type" format="integer"/>
+    </declare-styleable>
+</resources>
