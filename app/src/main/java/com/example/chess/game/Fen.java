@@ -15,10 +15,10 @@ public class Fen {
     private String halfmoveClock;
     private String fullmoveCounter;
 
-    private Map<Character, Integer> pieceFromSymbol;
-    private Map<Integer, String> symbolFromPiece;
-    private Map<Character, Integer> fileCharacterToIndex;
-    private Map<Integer, String> fileIndexToString;
+    private final Map<Character, Integer> pieceFromSymbol;
+    private final Map<Integer, String> symbolFromPiece;
+    private final Map<Character, Integer> fileCharacterToIndex;
+    private final Map<Integer, String> fileIndexToString;
 
     public Fen(String FEN) {
         piecePlacement = FEN.split(" ")[0];
@@ -87,10 +87,16 @@ public class Fen {
         fileIndexToString.put(7, "h");
     }
 
+    public void updateFen(Game game) {
+        updatePiecePlacement(game.board);
+        updateSideToMove(game.sideToMove);
+        updateCastlingAbility(game.white_king_side_castling, game.white_queen_side_castling, game.black_king_side_castling, game.black_queen_side_castling);
+        updateEnPassantSquareTarget(game.enPassant);
+    }
     /**
      * After a move is made the FEN is updated.
      */
-    public void updatePiecePlacement(Square[] board) {
+    private void updatePiecePlacement(Square[] board) {
         int numberEmptySquares = 0;
         StringBuilder positionsFen = new StringBuilder();
         int piece;
@@ -119,6 +125,45 @@ public class Fen {
         piecePlacement = positionsFen.toString();
     }
 
+    private void updateSideToMove(int sideToMove) {
+        if (sideToMove == Color.white) {
+            this.sideToMove = "w";
+        }
+        else {
+            this.sideToMove = "b";
+        }
+    }
+
+    private void updateCastlingAbility(boolean w_k_side, boolean w_q_side, boolean b_k_side, boolean b_q_side) {
+        castlingAbility = "";
+        if (w_k_side) {
+            castlingAbility += "K";
+        }
+        if (w_q_side) {
+            castlingAbility += "Q";
+        }
+        if (b_k_side) {
+            castlingAbility += "k";
+        }
+        if (b_q_side) {
+            castlingAbility += "q";
+        }
+        if (castlingAbility.equals("")) {
+            castlingAbility += "-";
+        }
+
+    }
+
+    private void updateEnPassantSquareTarget(Integer enPassant) {
+        if (enPassant != null) {
+            int rank = enPassant >> 3;
+            int file = enPassant % 8;
+            enPassantTargetSquare = fileIndexToString.get(file) + rank;
+        }
+        else {
+            enPassantTargetSquare = "-";
+        }
+    }
 
     public Square[] getPiecePlacement() {
         Square[] board = new Square[64];
@@ -148,15 +193,11 @@ public class Fen {
         return board;
     }
 
-    public void updateEnPassantSquareTarget(Integer enPassant) {
-        if (enPassant != null) {
-            int rank = enPassant >> 3;
-            int file = enPassant % 8;
-            enPassantTargetSquare = fileIndexToString.get(file) + rank;
+    public int getSideToMove() {
+        if (sideToMove.equals("w")) {
+            return Color.white;
         }
-        else {
-            enPassantTargetSquare = "-";
-        }
+        return Color.black;
     }
 
     public Integer getEnPassantSquareTarget() {
@@ -172,95 +213,11 @@ public class Fen {
         return enPassant;
     }
 
-    public void updateSideToMove(int sideToMove) {
-        if (sideToMove == Color.white) {
-            this.sideToMove = "w";
-        }
-        else {
-            this.sideToMove = "b";
-        }
-    }
-
-    public int getSideToMove() {
-        if (sideToMove.equals("w")) {
-            return Color.white;
-        }
-        return Color.black;
-    }
-
-//    public Map<String, Boolean> getCastlingAbility() {
-//        Map<String, Boolean> castling = new HashMap<>();
-//        castling.put("white_king_side", false);
-//        castling.put("white_queen_side", false);
-//        castling.put("black_king_side", false);
-//        castling.put("black_queen_side", false);
-//        for (int i = 0; i < castlingAbility.length(); i++) {
-//            char castlingCharacter = castlingAbility.charAt(i);
-//            switch (castlingCharacter) {
-//                case 'K':
-//                    castling.put("white_king_side", true);
-//                case 'Q':
-//                    castling.put("white_queen_side", true);
-//                case 'k':
-//                    castling.put("black_king_side", true);
-//                case 'q':
-//                    castling.put("black_queen_side", true);
-//            }
-//        }
-//        return castling;
-//    }
-//
-//    /**
-//     * @// TODO: 3/23/2021 these update functions should receive a string. the conversion shouldn't be done here
-//     * @param castling
-//     */
-//    public void updateCastlingAbility(Map<String, Boolean> castling) {
-//        castlingAbility = "";
-//        Boolean exists;
-//        exists = castling.get("white_king_side");
-//        if (exists != null && exists) {
-//            castlingAbility = castlingAbility + "K";
-//        }
-//        exists = castling.get("white_queen_side");
-//        if (exists != null && exists) {
-//            castlingAbility = castlingAbility + "Q";
-//        }
-//        exists = castling.get("black_king_side");
-//        if (exists != null && exists) {
-//            castlingAbility = castlingAbility + "k";
-//        }
-//        exists = castling.get("black_queen_side");
-//        if (exists != null && exists) {
-//            castlingAbility = castlingAbility + "q";
-//        }
-//
-//    }
-
-    public void updateCastlingAbility(boolean w_k_side, boolean w_q_side, boolean b_k_side, boolean b_q_side) {
-        castlingAbility = "";
-        if (w_k_side) {
-            castlingAbility += "K";
-        }
-        if (w_q_side) {
-            castlingAbility += "Q";
-        }
-        if (b_k_side) {
-            castlingAbility += "k";
-        }
-        if (b_q_side) {
-            castlingAbility += "q";
-        }
-        if (castlingAbility.equals("")) {
-            castlingAbility += "-";
-        }
-
-    }
-
     public String getCastlingAbility() {
         return castlingAbility;
     }
 
-    public String getFen() {
+    public String toString() {
         String FEN;
         FEN = piecePlacement + " " + sideToMove + " " + castlingAbility + " " +
                 enPassantTargetSquare + " " + halfmoveClock + " " + fullmoveCounter;

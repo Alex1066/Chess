@@ -25,13 +25,11 @@ import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private BoardSquareView[] squares = new BoardSquareView[64];
-    private List<PromotionOptionView> promotionOptions = new ArrayList<>();
+    private final BoardSquareView[] squares = new BoardSquareView[64];
+    private final List<PromotionOptionView> promotionOptions = new ArrayList<>();
     private LinearLayout promotionLayout;
-    private Map<String, Map<Integer, Drawable>> allSetsOfPieces = new HashMap<>();
-    private Map<String, ColorTheme> allBoardThemes = new HashMap<>();
-    private Game gc;
-    private GameUI gd;
+    private final Map<String, Map<Integer, Drawable>> allSetsOfPieces = new HashMap<>();
+    private final Map<String, ColorTheme> allBoardThemes = new HashMap<>();
     private GameController gm;
 
 
@@ -57,12 +55,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         promotionLayout = findViewById(getResources().getIdentifier("promotion_options", "id", getPackageName()));
         // @todo Perhaps read this from a file or let the user introduce its own fen. This one should
         // be the default value.
-//        String startingFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-        String startingFen = "r3k2r/8/n2bbq1n/8/8/B1NB1Q1N/8/R3K2R w KQkq - 0 1";
+        String startingFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+//        String startingFen = "r3k2r/8/n2bbq1n/8/8/B1NB1Q1N/8/R3K2R w KQkq - 0 1";
         Fen fen = new Fen(startingFen);
 
-        gc = new Game(fen);
-        gd = new GameUI(squares, promotionLayout, promotionOptions, allBoardThemes.get("red"), allSetsOfPieces.get("slim"));
+        Game gc = new Game(fen);
+        GameUI gd = new GameUI(squares, promotionLayout, promotionOptions, allBoardThemes.get("red"), allSetsOfPieces.get("slim"));
         gm = new GameController(gc, gd);
         gm.StartGame();
 
@@ -175,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pieceSet.put(Piece.white+ Piece.bishop, ContextCompat.getDrawable(this, R.drawable.classic_white_bishop));
         pieceSet.put(Piece.white+ Piece.knight, ContextCompat.getDrawable(this, R.drawable.classic_white_knight));
         pieceSet.put(Piece.white+ Piece.pawn, ContextCompat.getDrawable(this, R.drawable.classic_white_pawn));
-        allSetsOfPieces.put("classic", new HashMap<Integer, Drawable>(pieceSet));
+        allSetsOfPieces.put("classic", new HashMap<>(pieceSet));
         pieceSet.clear();
 
         // Slim set of pieces.
@@ -191,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pieceSet.put(Piece.white+ Piece.bishop, ContextCompat.getDrawable(this, R.drawable.slim_white_bishop));
         pieceSet.put(Piece.white+ Piece.knight, ContextCompat.getDrawable(this, R.drawable.slim_white_knight));
         pieceSet.put(Piece.white+ Piece.pawn, ContextCompat.getDrawable(this, R.drawable.slim_white_pawn));
-        allSetsOfPieces.put("slim", new HashMap<Integer, Drawable>(pieceSet));
+        allSetsOfPieces.put("slim", new HashMap<>(pieceSet));
         pieceSet.clear();
     }
 }
