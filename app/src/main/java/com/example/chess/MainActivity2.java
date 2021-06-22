@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.chess.entities.PlayMode;
+import com.example.chess.entities.Undo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity2 extends AppCompatActivity {
@@ -18,11 +20,27 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        Button btn = findViewById(R.id.play_vs_computer);
-        btn.setOnClickListener(new Button.OnClickListener() {
+        Button btn1 = findViewById(R.id.play_vs_computer);
+        btn1.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("Undo", Undo.doubleUndo);
+                bundle.putInt("PlayMode", PlayMode.vsComputer);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        Button btn2 = findViewById(R.id.play_vs_human);
+        btn2.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("Undo", Undo.normalUndo);
+                bundle.putInt("PlayMode", PlayMode.vsHuman);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

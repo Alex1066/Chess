@@ -13,6 +13,8 @@ import com.example.chess.design.ColorTheme;
 import com.example.chess.entities.Piece;
 import com.example.chess.customviews.BoardSquareView;
 import com.example.chess.customviews.PromotionOptionView;
+import com.example.chess.entities.PlayMode;
+import com.example.chess.entities.Undo;
 import com.example.chess.game.Fen;
 import com.example.chess.game.Game;
 import com.example.chess.game.GameController;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final Map<String, Map<Integer, Drawable>> allSetsOfPieces = new HashMap<>();
     private final Map<String, ColorTheme> allBoardThemes = new HashMap<>();
     private GameController gm;
+    private int undoDepth;
+    private int playMode;
 
 
     /**
@@ -51,6 +55,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setClickListeners();
         loadAssets();
         loadColorThemes();
+        new Bundle();
+        Bundle bundle;
+        bundle = getIntent().getExtras();
+        undoDepth = bundle.getInt("Undo");
+        playMode = bundle.getInt("PlayMode");
 
         promotionLayout = findViewById(getResources().getIdentifier("promotion_options", "id", getPackageName()));
         // @todo Perhaps read this from a file or let the user introduce its own fen. This one should
@@ -60,8 +69,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Fen fen = new Fen(startingFen);
 
         Game gc = new Game(fen);
-        GameUI gd = new GameUI(squares, promotionLayout, promotionOptions, allBoardThemes.get("red"), allSetsOfPieces.get("slim"));
-        gm = new GameController(gc, gd);
+        GameUI gd = new GameUI(squares, promotionLayout, promotionOptions, allBoardThemes.get("blue"), allSetsOfPieces.get("slim"));
+        gm = new GameController(gc, gd, playMode);
         gm.StartGame();
 
     }
@@ -127,17 +136,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        // If you click outside the promotion window when you are about to promote the pawn, then undo
+        // the move.
         if (promotionLayout.getVisibility() == View.VISIBLE && !(view instanceof PromotionOptionView)) {
-            gm.undo();
+            gm.undo(undoDepth);
             promotionLayout.setVisibility(View.GONE);
         }
         if (view instanceof BoardSquareView) {
             gm.actionHandler(((BoardSquareView) view).getSquareIndex());
         }
+        // The undo button.
         if (view instanceof Button) {
             if (view.getId() == getResources().getIdentifier("Reset", "id", getPackageName())) {
 //                gm.changeSide();
-                gm.undo();
+                gm.undo(undoDepth);
             }
         }
 //        Toast.makeText(this, "Player won", Toast.LENGTH_SHORT).show();

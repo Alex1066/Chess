@@ -51,10 +51,6 @@ public class Game {
         clearBoard();
     }
 
-    public Game() {
-        clearBoard();
-    }
-
     public void clearBoard() {
         for (int i = 0; i < 64; i++) {
             board[i] = new Square(i, 0);
@@ -187,9 +183,19 @@ public class Game {
 
     }
 
-    public void undo() {
-        if (gameHistory.size() > 1) {
-            gameHistory.remove(gameHistory.size() - 1);
+    /**
+     * This method will undo the last move done by the human player.
+     * If the game mode is human vs human, then only one undo is required.
+     * If the game move is human vs AI, then the game should undo both the human
+     * move and the response from the AI.
+     *
+     * @param depth the number of half moves to be undo
+     */
+    public void undo(int depth) {
+        if (gameHistory.size() > depth) {
+            for (int i = 0; i < depth; i++) {
+                gameHistory.remove(gameHistory.size() - 1);
+            }
             FEN = new Fen(gameHistory.get(gameHistory.size() - 1));
             loadGameStateFromFen();
         }

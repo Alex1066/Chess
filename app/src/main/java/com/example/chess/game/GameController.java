@@ -2,6 +2,7 @@ package com.example.chess.game;
 
 import com.example.chess.entities.Move;
 import com.example.chess.entities.Piece;
+import com.example.chess.entities.PlayMode;
 import com.example.chess.entities.Square;
 import com.example.chess.utility.Color;
 
@@ -20,10 +21,12 @@ public class GameController {
     private final List<Integer> highlightedSquares = new ArrayList<>();
     private List<Move> legalMoves = new ArrayList<>();
     private AIPlayer AI;
+    private int playMode;
 
-    public GameController(Game game, GameUI gameUI) {
+    public GameController(Game game, GameUI gameUI, int playMode) {
         this.game = game;
         this.gameUI = gameUI;
+        this.playMode = playMode;
         mh = new MovementHandler(game);
         AI = new AIPlayer(game, mh);
     }
@@ -75,7 +78,7 @@ public class GameController {
                     System.out.println("WHITE HAS WOOOON");
                 }
             }
-            else {
+            else if(playMode == PlayMode.vsComputer) {
                 Move AIMove = AI.doRandomMove();
                 game.executeMove(AIMove);
                 generateLegalMoves();
@@ -108,9 +111,9 @@ public class GameController {
         pieceToMove = null;
     }
 
-    public void undo() {
+    public void undo(int undoDepth) {
         endAction();
-        game.undo();
+        game.undo(undoDepth);
         gameUI.drawPiecesOnBoard(game.getBoard());
         generateLegalMoves();
     }
@@ -128,7 +131,7 @@ public class GameController {
                 System.out.println("WHITE HAS WOOOON");
             }
         }
-        else {
+        else if(playMode == PlayMode.vsComputer){
             Move AIMove = AI.doRandomMove();
             game.executeMove(AIMove);
             generateLegalMoves();
