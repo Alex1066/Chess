@@ -17,9 +17,9 @@ import java.util.Map;
 
 public class GameUI {
 
-    private BoardSquareView[] boardSquares;
-    private List<PromotionOptionView> promotionOptions;
-    private LinearLayout promotionLayout;
+    private final BoardSquareView[] boardSquares;
+    private final List<PromotionOptionView> promotionOptions;
+    private final LinearLayout promotionLayout;
     private ColorTheme colorTheme;
     private Map<Integer, Drawable> pieces;
 

@@ -1,7 +1,5 @@
 package com.example.chess.game;
 
-import com.example.chess.entities.Castling;
-import com.example.chess.entities.CastlingMove;
 import com.example.chess.entities.Move;
 import com.example.chess.entities.Piece;
 import com.example.chess.entities.Square;
@@ -12,18 +10,22 @@ import java.util.List;
 
 
 public class GameController {
-    private Game game;
-    private GameUI gameUI;
+    private final Game game;
+    private final GameUI gameUI;
+    private final MovementHandler mh;
 
     private Square pieceToMove = null;
     private int promotedPawnIndex;
     private int promotedTo;
-    private List<Integer> highlightedSquares = new ArrayList<>();
+    private final List<Integer> highlightedSquares = new ArrayList<>();
     private List<Move> legalMoves = new ArrayList<>();
+    private AIPlayer AI;
 
     public GameController(Game game, GameUI gameUI) {
         this.game = game;
         this.gameUI = gameUI;
+        mh = new MovementHandler(game);
+        AI = new AIPlayer(game, mh);
     }
 
     /**
@@ -35,11 +37,11 @@ public class GameController {
         Square clickedSquare = game.getBoard()[targetedSquare];
         int pieceColor = Piece.pieceColor(clickedSquare.getPiece());
         if (pieceToMove == null) {
-            if (pieceColor == game.getSideToMove()) {
+            if (pieceColor == game.sideToMove) {
                 selectPiece(targetedSquare);
             }
         } else {
-            if (pieceColor == game.getSideToMove()) {
+            if (pieceColor == game.sideToMove) {
                 if (pieceToMove.getPosition() != targetedSquare) {
                     endAction();
                     selectPiece(targetedSquare);
@@ -67,10 +69,22 @@ public class GameController {
         } else {
             generateLegalMoves();
             if (isCheckMate()) {
-                if (game.getSideToMove() == Color.white) {
+                if (game.sideToMove == Color.white) {
                     System.out.println("BLACK HAS WOOOON");
                 } else {
                     System.out.println("WHITE HAS WOOOON");
+                }
+            }
+            else {
+                Move AIMove = AI.doRandomMove();
+                game.executeMove(AIMove);
+                generateLegalMoves();
+                if (isCheckMate()) {
+                    if (game.sideToMove == Color.white) {
+                        System.out.println("BLACK HAS WOOOON");
+                    } else {
+                        System.out.println("WHITE HAS WOOOON");
+                    }
                 }
             }
         }
@@ -114,21 +128,23 @@ public class GameController {
                 System.out.println("WHITE HAS WOOOON");
             }
         }
+        else {
+            Move AIMove = AI.doRandomMove();
+            game.executeMove(AIMove);
+            generateLegalMoves();
+            if (isCheckMate()) {
+                if (game.sideToMove == Color.white) {
+                    System.out.println("BLACK HAS WOOOON");
+                } else {
+                    System.out.println("WHITE HAS WOOOON");
+                }
+            }
+        }
         gameUI.removePromotionOptions();
         gameUI.drawPiecesOnBoard(game.getBoard());
     }
 
-    public boolean isAttackingKing(List<Move> moves, int kingPosition) {
-        for (Move m : moves) {
-            if (m.targetSquareIndex == kingPosition) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /**
-     * @return
      * @// TODO: 3/23/2021 When it is check mate display a message for the player. also add a reset button
      */
     public boolean isCheckMate() {
@@ -136,137 +152,8 @@ public class GameController {
     }
 
     public void generateLegalMoves() {
-        legalMoves.clear();
-        int kingPosition = 0;
-        List<Move> pseudoLegal = game.generatePseudoLegalMoves();
-        for (Move moveToCheck : pseudoLegal) {
-            game.executeMove(moveToCheck);
-            if (game.getSideToMove() == Color.black) {
-                kingPosition = game.whiteKingPosition;
-            } else {
-                kingPosition = game.blackKingPosition;
-            }
-            List<Move> opponentResponses = game.generatePseudoLegalMoves();
-            if (!isAttackingKing(opponentResponses, kingPosition)) {
-                legalMoves.add(moveToCheck);
-            }
-            game.undo();
-        }
-        addCastling(kingPosition);
-    }
-
-    public boolean checkWhiteKingSideCastling(int kingPosition) {
-        if (game.white_king_side_castling &&
-                game.getBoard()[kingPosition + 1].getPiece() == Piece.empty &&
-                game.getBoard()[kingPosition + 2].getPiece() == Piece.empty) {
-            for (int i = 0; i <= 2; i++) {
-                game.executeMove(new Move(kingPosition, kingPosition + i));
-                List<Move> opponentResponses = game.generatePseudoLegalMoves();
-                if (isAttackingKing(opponentResponses, kingPosition + i)) {
-                    game.undo();
-                    return false;
-                }
-                game.undo();
-            }
-        } else {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean checkWhiteQueenSideCastling(int kingPosition) {
-        if (game.white_queen_side_castling &&
-                game.getBoard()[kingPosition - 1].getPiece() == Piece.empty &&
-                game.getBoard()[kingPosition - 2].getPiece() == Piece.empty &&
-                game.getBoard()[kingPosition - 3].getPiece() == Piece.empty) {
-            for (int i = 0; i <= 3; i++) {
-                game.executeMove(new Move(kingPosition, kingPosition - i));
-                List<Move> opponentResponses = game.generatePseudoLegalMoves();
-                if (isAttackingKing(opponentResponses, kingPosition - i)) {
-                    game.undo();
-                    return false;
-                }
-                game.undo();
-            }
-        } else {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean checkBlackKingSideCastling(int kingPosition) {
-        if (game.black_king_side_castling &&
-                game.getBoard()[kingPosition + 1].getPiece() == Piece.empty &&
-                game.getBoard()[kingPosition + 2].getPiece() == Piece.empty) {
-            for (int i = 0; i <= 2; i++) {
-                game.executeMove(new Move(kingPosition, kingPosition + i));
-                List<Move> opponentResponses = game.generatePseudoLegalMoves();
-                if (isAttackingKing(opponentResponses, kingPosition + i)) {
-                    game.undo();
-                    return false;
-                }
-                game.undo();
-            }
-        } else {
-            return false;
-        }
-        return true;
-    }
-
-    public  boolean checkBlackQueenSideCastling(int kingPosition) {
-        if (game.black_queen_side_castling &&
-                game.getBoard()[kingPosition - 1].getPiece() == Piece.empty &&
-                game.getBoard()[kingPosition - 2].getPiece() == Piece.empty &&
-                game.getBoard()[kingPosition - 3].getPiece() == Piece.empty) {
-            for (int i = 0; i <= 3; i++) {
-                game.executeMove(new Move(kingPosition, kingPosition - i));
-                List<Move> opponentResponses = game.generatePseudoLegalMoves();
-                if (isAttackingKing(opponentResponses, kingPosition - i)) {
-                    game.undo();
-                    return false;
-                }
-                game.undo();
-            }
-        } else {
-            return false;
-        }
-        return true;
-    }
-
-    public void addCastling(int kingPosition) {
-        CastlingMove castling;
-        if (game.getSideToMove() == Color.white) {
-            if (checkWhiteKingSideCastling(kingPosition)) {
-                castling = new CastlingMove(kingPosition, kingPosition + 2);
-                castling.rookInitialPosition = Castling.whiteKingSideRookInitialPosition;
-                castling.rookFinalPosition = Castling.whiteRookPositionAfterKingSideCastling;
-                castling.markAsCastling();
-                legalMoves.add(castling);
-            }
-            if (checkWhiteQueenSideCastling(kingPosition)) {
-                castling = new CastlingMove(kingPosition, kingPosition - 2);
-                castling.rookInitialPosition = Castling.whiteQueenSideRookInitialPosition;
-                castling.rookFinalPosition = Castling.whiteRookPositionAfterQueenSideCastling;
-                castling.markAsCastling();
-                legalMoves.add(castling);
-            }
-        }
-        else {
-            if (checkBlackKingSideCastling(kingPosition)) {
-                castling = new CastlingMove(kingPosition, kingPosition + 2);
-                castling.rookInitialPosition = Castling.blackKingSideRookInitialPosition;
-                castling.rookFinalPosition = Castling.blackRookPositionAfterKingSideCastling;
-                castling.markAsCastling();
-                legalMoves.add(castling);
-            }
-            if (checkBlackQueenSideCastling(kingPosition)) {
-                castling = new CastlingMove(kingPosition, kingPosition - 2);
-                castling.rookInitialPosition = Castling.blackQueenSideRookInitialPosition;
-                castling.rookFinalPosition = Castling.blackRookPositionAfterQueenSideCastling;
-                castling.markAsCastling();
-                legalMoves.add(castling);
-            }
-        }
+        mh.generateLegalMoves();
+        legalMoves = mh.legalMoves;
     }
 
     public Move getWantedMove(Move wantedMove) {
