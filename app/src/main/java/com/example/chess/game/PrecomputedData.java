@@ -19,10 +19,6 @@ public class PrecomputedData {
 
     public PrecomputedData() {
         precomputedDistanceData();
-//        for (List<Integer> moves : arrWhitePawnPushes) {
-//            System.out.println(moves);
-//            System.out.println();
-//        }
     }
 
     /**

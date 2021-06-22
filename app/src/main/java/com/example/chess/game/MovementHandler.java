@@ -43,7 +43,8 @@ public class MovementHandler {
             if (!isKingInCheck(opponentResponses, Color.oppositeColor(game.sideToMove))) {
                 legalMoves.add(moveToCheck);
             }
-            game.undo();
+            //
+            game.undo(1);
         }
         addCastling();
     }
@@ -234,11 +235,16 @@ public class MovementHandler {
             // Since we play a move in advance, now it's the other's player time to move. We need the
             // color of the initial player for which we are generating the legal moves, thus the call
             // of oppositeColor method.
+
+            // We need to undo the executed move. Since there is no AI involved, we only need to remove
+            // the last move done in advanced for this check.
+            int undoDepth = 1;
+
             if (isKingInCheck(opponentResponses, Color.oppositeColor(game.sideToMove))) {
-                game.undo();
+                game.undo(undoDepth);
                 return false;
             }
-            game.undo();
+            game.undo(undoDepth);
         }
         return true;
     }

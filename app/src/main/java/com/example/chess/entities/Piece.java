@@ -27,6 +27,4 @@ public class Piece {
         return (piece % 8) == rook || (piece % 8) == bishop || (piece % 8) == queen;
     }
 
-    public static int getPieceType(int piece) { return piece & 7; }
-
 }
